@@ -4,6 +4,7 @@ import React from "react";
 import { useWishlist } from "../context/WishlistContext";
 import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image"; // ✅ Import from next/image
 
 const ProductCard = ({ product }) => {
   const { wishlist, toggleWishlist } = useWishlist();
@@ -22,15 +23,21 @@ const ProductCard = ({ product }) => {
         onClick={() => toggleWishlist(product)}
         className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-red-100 z-10"
       >
-        <Heart className={`w-5 h-5 transition ${isWished ? "text-red-500 fill-red-500" : "text-gray-500"}`} />
+        <Heart
+          className={`w-5 h-5 transition ${
+            isWished ? "text-red-500 fill-red-500" : "text-gray-500"
+          }`}
+        />
       </motion.button>
 
-      {/* Image */}
+      {/* ✅ Optimized Image */}
       <div className="w-full h-[240px] flex items-center justify-center px-3">
-        <img
+        <Image
           src={product.image}
           alt={product.name}
-          className="max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+          width={200}
+          height={200}
+          className="object-contain transition-transform duration-300 group-hover:scale-105"
         />
       </div>
 
@@ -41,7 +48,9 @@ const ProductCard = ({ product }) => {
           <span className="bg-green-600 text-white px-1.5 py-0.5 rounded text-[10px] font-semibold">
             {product.rating?.toFixed(1) || "4.3"}
           </span>
-          <span className="text-gray-500">({product.ratingCount || "1.5k"})</span>
+          <span className="text-gray-500">
+            ({product.ratingCount || "1.5k"})
+          </span>
         </div>
 
         {/* Brand & Name */}
@@ -54,7 +63,9 @@ const ProductCard = ({ product }) => {
         {/* Price */}
         <div className="flex items-center gap-2 mt-1">
           <p className="text-sm font-bold text-black">₹{product.price}</p>
-          <p className="line-through text-xs text-gray-400">₹{Math.round(product.price * 1.6)}</p>
+          <p className="line-through text-xs text-gray-400">
+            ₹{Math.round(product.price * 1.6)}
+          </p>
           <p className="text-xs text-pink-600 font-semibold">40% OFF</p>
         </div>
 
