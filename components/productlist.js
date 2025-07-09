@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { product } from "../data/products";
-import ProductCard from "../components/ProductCard";
-import FilterPanel from "../components/FilterPanel";
+import ProductCard from "../components/productcard";
+import FilterPanel from "../components/filterpanel";
 
 const ProductList = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
